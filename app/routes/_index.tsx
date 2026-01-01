@@ -1,24 +1,7 @@
-import { LuArrowRight as ArrowRight } from "react-icons/lu";
-import { LuSparkles as Sparkles } from "react-icons/lu";
-import { LuZap as Zap } from "react-icons/lu";
-import { LuGlobe as Globe } from "react-icons/lu";
-import { LuShield as Shield } from "react-icons/lu";
-import { LuCode as Code } from "react-icons/lu";
-import { LuStar as Star } from "react-icons/lu";
-import { LuRocket as Rocket } from "react-icons/lu";
-import { LuCheckCircle as CheckCircle } from "react-icons/lu";
-import { LuGithub as Github } from "react-icons/lu";
-import { LuTwitter as Twitter } from "react-icons/lu";
-import { LuLinkedin as Linkedin } from "react-icons/lu";
-import { LuMenu as Menu } from "react-icons/lu";
-import { LuX as X } from "react-icons/lu";
-import { LuMail as Mail } from "react-icons/lu";
-import { LuPhone as Phone } from "react-icons/lu";
-import { LuMapPin as MapPin } from "react-icons/lu";
-import { LuSend as Send } from "react-icons/lu";
-import { LuExternalLink as ExternalLink } from "react-icons/lu";
-import { LuArrowUpRight as ArrowUpRight } from "react-icons/lu";
-
+// app/routes/_index.tsx
+import type { MetaFunction } from "react-router";
+import { Link } from "react-router";
+import { useState, useEffect } from "react";
 
 export const meta: MetaFunction = () => {
     return [
@@ -27,12 +10,27 @@ export const meta: MetaFunction = () => {
     ];
 };
 
+// Simple SVG as text for icons
+const Icon = ({ name, className = "w-6 h-6" }: { name: string; className?: string }) => {
+    const icons: Record<string, string> = {
+        arrow: "→",
+        star: "★",
+        check: "✓",
+        zap: "⚡",
+        shield: "🛡️",
+        globe: "🌍",
+        code: "</>",
+        rocket: "🚀",
+    };
+
+    return <span className={className}>{icons[name] || "•"}</span>;
+};
+
 export default function Index() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(false);
 
     useEffect(() => {
-        // Check for saved theme preference or system preference
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             setIsDarkMode(true);
@@ -54,25 +52,25 @@ export default function Index() {
 
     const features = [
         {
-            icon: <Zap className="w-6 h-6" />,
+            icon: <Icon name="zap" />,
             title: "Lightning Fast",
             description: "Edge-deployed applications with Cloudflare Workers for sub-100ms response times",
             color: "from-yellow-400 to-orange-500"
         },
         {
-            icon: <Shield className="w-6 h-6" />,
+            icon: <Icon name="shield" />,
             title: "Secure by Design",
             description: "Built-in security features with zero-trust architecture and DDoS protection",
             color: "from-green-400 to-emerald-600"
         },
         {
-            icon: <Globe className="w-6 h-6" />,
+            icon: <Icon name="globe" />,
             title: "Global Scale",
             description: "Deployed across 300+ Cloudflare edge locations worldwide",
             color: "from-blue-400 to-cyan-500"
         },
         {
-            icon: <Code className="w-6 h-6" />,
+            icon: <Icon name="code" />,
             title: "Modern Stack",
             description: "React 19, TypeScript, Tailwind CSS, and React Router v7",
             color: "from-purple-400 to-pink-500"
@@ -105,19 +103,16 @@ export default function Index() {
             name: "Alex Johnson",
             role: "CTO at TechCorp",
             content: "The team delivered exceptional performance improvements. Our site now loads 3x faster!",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
         },
         {
             name: "Sarah Chen",
             role: "Lead Developer",
             content: "Security implementation was seamless. Their attention to detail is remarkable.",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
         },
         {
             name: "Marcus Rivera",
             role: "Product Manager",
             content: "Transformed our legacy application into a modern, scalable platform.",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus"
         }
     ];
 
@@ -129,7 +124,7 @@ export default function Index() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                             <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                                <Sparkles className="w-6 h-6 text-white" />
+                                <span className="text-white text-lg">⚡</span>
                             </div>
                             <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                                 DevSecs
@@ -157,7 +152,7 @@ export default function Index() {
                                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300 flex items-center space-x-2"
                             >
                                 <span>Get Started</span>
-                                <ArrowRight className="w-4 h-4" />
+                                <Icon name="arrow" className="w-4 h-4" />
                             </Link>
                         </div>
 
@@ -167,7 +162,7 @@ export default function Index() {
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             aria-label="Toggle menu"
                         >
-                            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            {isMenuOpen ? '✕' : '☰'}
                         </button>
                     </div>
 
@@ -197,7 +192,7 @@ export default function Index() {
                 <div className="container mx-auto">
                     <div className="max-w-4xl mx-auto text-center">
                         <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 px-4 py-2 rounded-full mb-6">
-                            <Sparkles className="w-4 h-4 text-blue-500" />
+                            <span className="text-blue-500">⚡</span>
                             <span className="text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                                 Now Powered by Cloudflare Workers
                             </span>
@@ -220,7 +215,7 @@ export default function Index() {
                                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 text-lg font-medium"
                             >
                                 <span>View Projects</span>
-                                <ArrowRight className="w-5 h-5" />
+                                <Icon name="arrow" className="w-5 h-5" />
                             </Link>
                             <Link
                                 to="/contact"
@@ -271,7 +266,7 @@ export default function Index() {
                                 className="group bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                             >
                                 <div className={`w-14 h-14 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                                    <div className="text-white">
+                                    <div className="text-white text-2xl">
                                         {feature.icon}
                                     </div>
                                 </div>
@@ -330,7 +325,7 @@ export default function Index() {
                                         className="mt-8 w-full py-3 bg-white/10 hover:bg-white/20 rounded-xl backdrop-blur-sm transition-all duration-300 group-hover:translate-x-2 flex items-center justify-center space-x-2"
                                     >
                                         <span>View Details</span>
-                                        <ArrowRight className="w-4 h-4" />
+                                        <Icon name="arrow" className="w-4 h-4" />
                                     </Link>
                                 </div>
                             </div>
@@ -355,11 +350,9 @@ export default function Index() {
                                 className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg"
                             >
                                 <div className="flex items-center mb-6">
-                                    <img
-                                        src={testimonial.avatar}
-                                        alt={testimonial.name}
-                                        className="w-12 h-12 rounded-full mr-4"
-                                    />
+                                    <div className="w-12 h-12 rounded-full mr-4 bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                                        <span className="text-white font-bold">{testimonial.name.charAt(0)}</span>
+                                    </div>
                                     <div>
                                         <h4 className="font-bold text-gray-900 dark:text-white">
                                             {testimonial.name}
@@ -374,7 +367,7 @@ export default function Index() {
                                 </p>
                                 <div className="flex mt-4">
                                     {[...Array(5)].map((_, i) => (
-                                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                                        <Icon key={i} name="star" className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                                     ))}
                                 </div>
                             </div>
@@ -399,7 +392,7 @@ export default function Index() {
                                 to="/contact"
                                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 text-lg font-medium"
                             >
-                                <Rocket className="w-5 h-5" />
+                                <Icon name="rocket" className="w-5 h-5" />
                                 <span>Start Your Project</span>
                             </Link>
                             <a
@@ -419,20 +412,20 @@ export default function Index() {
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <div className="flex items-center space-x-2 mb-6 md:mb-0">
                             <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                                <Sparkles className="w-6 h-6" />
+                                <span className="text-white">⚡</span>
                             </div>
                             <span className="text-2xl font-bold">DevSecs</span>
                         </div>
 
                         <div className="flex space-x-6 mb-6 md:mb-0">
                             <a href="https://github.com" className="hover:text-blue-400 transition">
-                                <Github className="w-6 h-6" />
+                                <Icon name="code" className="w-6 h-6" />
                             </a>
                             <a href="https://twitter.com" className="hover:text-blue-400 transition">
-                                <Twitter className="w-6 h-6" />
+                                <span className="text-2xl">𝕏</span>
                             </a>
                             <a href="https://linkedin.com" className="hover:text-blue-400 transition">
-                                <Linkedin className="w-6 h-6" />
+                                <span className="text-2xl">in</span>
                             </a>
                         </div>
 
