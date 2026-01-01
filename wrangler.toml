@@ -1,5 +1,7 @@
-# Change this:
-# main = "workers/app.ts"
+name = "my-react-router-app"
+main = "workers/app.ts"
+compatibility_date = "2024-11-18"
 
-# To this (or wherever your vite build outputs the worker):
-main = "./build/server/index.js"    
+[assets]
+directory = "./build/client"
+binding = "ASSETS"
