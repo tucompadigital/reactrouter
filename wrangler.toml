@@ -1,0 +1,5 @@
+# Change this:
+# main = "workers/app.ts"
+
+# To this (or wherever your vite build outputs the worker):
+main = "./build/server/index.js"    
