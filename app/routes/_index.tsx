@@ -1,0 +1,37 @@
+{
+    "name": "reactrouter",
+        "private": true,
+            "sideEffects": false,
+                "type": "module",
+                    "scripts": {
+        "build": "react-router build",
+            "dev": "react-router dev",
+                "start": "react-router dev",
+                    "typecheck": "tsc",
+                        "deploy": "wrangler deploy",
+                            "cf-typegen": "wrangler types"
+    },
+    "dependencies": {
+        "isbot": "^5.1.32",
+            "react": "^19.2.3",
+                "react-dom": "^19.2.3",
+                    "react-router": "^7.9.6",
+                        "lucide-react": "^0.344.0"
+    },
+    "devDependencies": {
+        "@cloudflare/vite-plugin": "^1.15.3",
+            "@react-router/dev": "^7.9.6",
+                "@tailwindcss/vite": "^4.1.17",
+                    "@types/node": "^24.10.1",
+                        "@types/react": "^19.2.7",
+                            "@types/react-dom": "^19.2.3",
+                                "tailwindcss": "^4.1.17",
+                                    "typescript": "^5.9.3",
+                                        "vite": "^6.4.1",
+                                            "vite-tsconfig-paths": "^5.1.4",
+                                                "wrangler": "^4.56.0"
+    },
+    "engines": {
+        "node": ">=20.0.0"
+    }
+}

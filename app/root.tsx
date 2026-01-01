@@ -1,75 +1,108 @@
-import {
-	isRouteErrorResponse,
-	Links,
-	Meta,
-	Outlet,
-	Scripts,
-	ScrollRestoration,
-} from "react-router";
+@import "tailwindcss";
 
-import type { Route } from "./+types/root";
-import "./app.css";
+@theme {
+	--font - sans: ui - sans - serif, system - ui, sans - serif, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 
-export const links: Route.LinksFunction = () => [
-	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
-	{
-		rel: "preconnect",
-		href: "https://fonts.gstatic.com",
-		crossOrigin: "anonymous",
-	},
-	{
-		rel: "stylesheet",
-		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-	},
-];
-
-export function Layout({ children }: { children: React.ReactNode }) {
-	return (
-		<html lang="en">
-			<head>
-				<meta charSet="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<Meta />
-				<Links />
-			</head>
-			<body>
-				{children}
-				<ScrollRestoration />
-				<Scripts />
-			</body>
-		</html>
-	);
-}
-
-export default function App() {
-	return <Outlet />;
-}
-
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-	let message = "Oops!";
-	let details = "An unexpected error occurred.";
-	let stack: string | undefined;
-
-	if (isRouteErrorResponse(error)) {
-		message = error.status === 404 ? "404" : "Error";
-		details =
-			error.status === 404
-				? "The requested page could not be found."
-				: error.statusText || details;
-	} else if (import.meta.env.DEV && error && error instanceof Error) {
-		details = error.message;
-		stack = error.stack;
+	/* Custom animations */
+	@keyframes fade -in {
+		from {
+		opacity: 0;
+		transform: translateY(10px);
 	}
+    to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
-	return (
-		<main className="pt-16 p-4 container mx-auto">
-			<h1>{message}</h1>
-			<p>{details}</p>
-			{stack && (
-				<pre className="w-full p-4 overflow-x-auto">
-					<code>{stack}</code>
-				</pre>
-			)}
-		</main>
-	);
+@keyframes slide -in {
+	from {
+	transform: translateX(-20px);
+	opacity: 0;
+}
+    to {
+	transform: translateX(0);
+	opacity: 1;
+}
+  }
+}
+
+/* Custom styles */
+html {
+	scroll - behavior: smooth;
+}
+
+body {
+	font - feature - settings: "ss01", "ss02", "cv01", "cv02";
+}
+
+/* Custom scrollbar */
+:: -webkit - scrollbar {
+	width: 10px;
+}
+
+:: -webkit - scrollbar - track {
+	background: #f1f1f1;
+}
+
+.dark:: -webkit - scrollbar - track {
+	background: #1f2937;
+}
+
+:: -webkit - scrollbar - thumb {
+	background: #888;
+	border - radius: 5px;
+}
+
+:: -webkit - scrollbar - thumb:hover {
+	background: #555;
+}
+
+.dark:: -webkit - scrollbar - thumb {
+	background: #4b5563;
+}
+
+.dark:: -webkit - scrollbar - thumb:hover {
+	background: #6b7280;
+}
+
+/* Smooth transitions */
+.fade -in {
+	animation: fade -in 0.5s ease- out;
+}
+
+.slide -in {
+	animation: slide -in 0.3s ease- out;
+}
+
+/* Gradient text animation */
+.animate - gradient {
+	background - size: 200 % 200 %;
+	animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+	0 % {
+		background- position: 0 % 50 %;
+}
+50 % {
+	background- position: 100 % 50 %;
+  }
+100 % {
+	background- position: 0 % 50 %;
+  }
+}
+
+/* Custom utility classes */
+.glass {
+	backdrop - filter: blur(10px);
+	-webkit - backdrop - filter: blur(10px);
+}
+
+.hover - lift {
+	transition: transform 0.2s ease;
+}
+
+.hover - lift:hover {
+	transform: translateY(-4px);
 }
