@@ -4,8 +4,11 @@
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
-	"main": "build/server/index.js", // [!code ++]
+	"main": "workers/app.ts",
 	"assets": {
 		"directory": "./build/client"
+	},
+	"observability": {
+		"enabled": true
 	}
 }
