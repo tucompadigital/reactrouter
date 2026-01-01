@@ -1,4 +1,7 @@
-{
+"scripts": {
+	"build": "mkdir -p build/server && touch build/server/index.js && react-router build",
+	"deploy": "wrangler deploy"
+}{
 	"name": "reactrouter",
 	"private": true,
 	"sideEffects": false,
