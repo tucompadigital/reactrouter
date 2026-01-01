@@ -1,6 +1,6 @@
 import { createRequestHandler } from "react-router";
 
-// @ts-ignore - Vite will resolve this during 'npm run build'
+// @ts-ignore
 import * as build from "virtual:react-router/server-build";
 
 const requestHandler = createRequestHandler(build, import.meta.env.MODE);

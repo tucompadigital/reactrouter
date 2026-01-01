@@ -4,7 +4,7 @@
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
-	"main": "workers/app.ts",
+	"main": "build/server/index.js", // [!code ++]
 	"assets": {
 		"directory": "./build/client"
 	}
