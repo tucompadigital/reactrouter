@@ -1,14 +1,12 @@
 {
-	"$schema": "./node_modules/wrangler/config-schema.json",
 	"name": "reactrouter",
-	"main": "./workers/app.ts",
-	"compatibility_date": "2025-10-08",
-	"compatibility_flags": ["nodejs_compat"],
-	"observability": {
-		"enabled": true
-	},
-	"upload_source_maps": true,
-	"vars": {
-		"VALUE_FROM_CLOUDFLARE": "Hola esta es una buena prueba para trabajar "
+	"compatibility_date": "2024-01-01",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"main": "build/server/index.js",
+	"build": {
+		"command": "npm run build",
+		"cwd": "."
 	}
 }
