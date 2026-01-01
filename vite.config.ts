@@ -6,10 +6,6 @@ import { reactRouter } from "@react-router/dev/vite";
 export default defineConfig({
 	plugins: [
 		cloudflare(),
-		reactRouter({
-			future: {
-				v8_viteEnvironmentApi: true,
-			},
-		}),
+		reactRouter(),
 	],
 });
