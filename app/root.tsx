@@ -1,108 +1,71 @@
-@import "tailwindcss";
+import {
+	Links,
+	Meta,
+	Outlet,
+	Scripts,
+	ScrollRestoration,
+	LiveReload,
+	useLoaderData,
+} from "react-router";
+import type { LinksFunction } from "react-router";
+import stylesheet from "./app.css?url";
 
-@theme {
-	--font - sans: ui - sans - serif, system - ui, sans - serif, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+export const links: LinksFunction = () => [
+	{ rel: "stylesheet", href: stylesheet },
+	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
+	{ rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+	{
+		rel: "stylesheet",
+		href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+	},
+	{ rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+];
 
-	/* Custom animations */
-	@keyframes fade -in {
-		from {
-		opacity: 0;
-		transform: translateY(10px);
-	}
-    to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-@keyframes slide -in {
-	from {
-	transform: translateX(-20px);
-	opacity: 0;
-}
-    to {
-	transform: translateX(0);
-	opacity: 1;
-}
-  }
-}
-
-/* Custom styles */
-html {
-	scroll - behavior: smooth;
+export async function loader() {
+	return {
+		ENV: {
+			VALUE_FROM_CLOUDFLARE: process.env.VALUE_FROM_CLOUDFLARE,
+		},
+	};
 }
 
-body {
-	font - feature - settings: "ss01", "ss02", "cv01", "cv02";
-}
+export default function App() {
+	const data = useLoaderData<typeof loader>();
 
-/* Custom scrollbar */
-:: -webkit - scrollbar {
-	width: 10px;
-}
-
-:: -webkit - scrollbar - track {
-	background: #f1f1f1;
-}
-
-.dark:: -webkit - scrollbar - track {
-	background: #1f2937;
-}
-
-:: -webkit - scrollbar - thumb {
-	background: #888;
-	border - radius: 5px;
-}
-
-:: -webkit - scrollbar - thumb:hover {
-	background: #555;
-}
-
-.dark:: -webkit - scrollbar - thumb {
-	background: #4b5563;
-}
-
-.dark:: -webkit - scrollbar - thumb:hover {
-	background: #6b7280;
-}
-
-/* Smooth transitions */
-.fade -in {
-	animation: fade -in 0.5s ease- out;
-}
-
-.slide -in {
-	animation: slide -in 0.3s ease- out;
-}
-
-/* Gradient text animation */
-.animate - gradient {
-	background - size: 200 % 200 %;
-	animation: gradient 3s ease infinite;
-}
-
-@keyframes gradient {
-	0 % {
-		background- position: 0 % 50 %;
-}
-50 % {
-	background- position: 100 % 50 %;
-  }
-100 % {
-	background- position: 0 % 50 %;
-  }
-}
-
-/* Custom utility classes */
-.glass {
-	backdrop - filter: blur(10px);
-	-webkit - backdrop - filter: blur(10px);
-}
-
-.hover - lift {
-	transition: transform 0.2s ease;
-}
-
-.hover - lift:hover {
-	transform: translateY(-4px);
+	return (
+		<html lang="en" className="scroll-smooth">
+			<head>
+				<meta charSet="utf-8" />
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<Meta />
+				<Links />
+			</head>
+			<body className="font-sans antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+				<Outlet />
+				<ScrollRestoration />
+				<Scripts />
+				<LiveReload />
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+              // Initialize dark mode from localStorage
+              (function() {
+                const theme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                
+                if (theme === 'dark' || (!theme && prefersDark)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+                
+                // Store environment variables
+                window.ENV = ${JSON.stringify(data.ENV)};
+              })();
+            `,
+					}}
+				/>
+			</body>
+		</html>
+	);
 }
