@@ -5,7 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
 	plugins: [
-		cloudflare(),
+		cloudflare(), // This MUST come before reactRouter()
 		reactRouter(),
 		tsconfigPaths(),
 	],

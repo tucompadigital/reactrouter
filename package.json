@@ -1,15 +1,11 @@
-"scripts": {
-	"build": "mkdir -p build/server && touch build/server/index.js && react-router build",
-	"deploy": "wrangler deploy"
-}{
+{
 	"name": "reactrouter",
 	"private": true,
 	"sideEffects": false,
 	"type": "module",
 	"scripts": {
-		"build": "react-router build",
+		"build": "mkdir -p build/server && touch build/server/index.js && react-router build",
 		"dev": "react-router dev",
-		"start": "react-router dev",
 		"typecheck": "tsc",
 		"deploy": "wrangler deploy",
 		"cf-typegen": "wrangler types"
@@ -18,22 +14,19 @@
 		"isbot": "^5.1.32",
 		"react": "^19.2.3",
 		"react-dom": "^19.2.3",
-		"react-router": "^7.9.6"
+		"react-router": "^7.11.0"
 	},
 	"devDependencies": {
-		"@cloudflare/vite-plugin": "^1.15.3",
-		"@react-router/dev": "^7.9.6",
-		"@tailwindcss/vite": "^4.1.17",
-		"@types/node": "^24.10.1",
+		"@cloudflare/vite-plugin": "^1.17.1",
+		"@react-router/dev": "^7.11.0",
+		"@tailwindcss/vite": "^4.1.18",
+		"@types/node": "^24.10.4",
 		"@types/react": "^19.2.7",
 		"@types/react-dom": "^19.2.3",
-		"tailwindcss": "^4.1.17",
+		"tailwindcss": "^4.1.18",
 		"typescript": "^5.9.3",
 		"vite": "^6.4.1",
 		"vite-tsconfig-paths": "^5.1.4",
 		"wrangler": "^4.56.0"
-	},
-	"engines": {
-		"node": ">=20.0.0"
 	}
 }
